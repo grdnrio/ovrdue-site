@@ -318,9 +318,11 @@
 </div>
 
 <script>
-  // Waitlist. Set WAITLIST_ENDPOINT to the form provider's POST URL
-  // (Kit, Buttondown, Formspree and similar all accept a plain email field).
-  const WAITLIST_ENDPOINT = "";
+  // Waitlist: posts to a Kit form. The API key is Kit's public key, which is
+  // meant to live in a web page (the API secret is a different thing and never goes here).
+  const KIT_FORM_ID = "10050027";
+  const KIT_API_KEY = "_-ew7o79BSWsGlqOKO8Iyw";
+  const WAITLIST_ENDPOINT = `https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`;
 
   document.querySelectorAll("form[data-waitlist]").forEach(form => {
     const note = form.parentElement.querySelector("[data-note]");
@@ -338,7 +340,7 @@
         const res = await fetch(WAITLIST_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ api_key: KIT_API_KEY, email })
         });
         if (!res.ok) throw new Error(String(res.status));
         note.dataset.state = "ok";
