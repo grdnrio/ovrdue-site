@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ovrdue Helper for Mac</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; color: #1c1b19; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; line-height: 1.6;
+         background: radial-gradient(520px 520px at 100% 90px, rgba(230,214,235,0.55), transparent 70%), linear-gradient(180deg, #fbe0cc 0, #f6f1e9 900px); background-repeat: no-repeat; min-height: 100vh; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1, h2 { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; }
+  h1 { font-size: 2.4rem; line-height: 1.1; margin: 24px 0 8px; }
+  h2 { font-size: 1.4rem; margin: 32px 0 8px; }
+  .muted { color: #7a7570; }
+  a { color: inherit; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; background: #1c1b19; color: #f6f1e9; border-radius: 999px; padding: 15px 26px; font-weight: 600; text-decoration: none; margin: 12px 0; }
+  ol { padding-left: 20px; } li { margin: 6px 0; }
+  .card { background: rgba(255,255,255,0.78); border-radius: 20px; padding: 22px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" style="text-decoration:none;font-weight:600">← Ovrdue</a>
+  <h1>Ovrdue Helper for Mac</h1>
+  <p class="muted">Beta build 0.1.0. For people on the test list; please don't share the link yet.</p>
+  <a class="pill" href="downloads/Ovrdue-Helper-0.1.0.dmg">Download for Mac (1.2 MB)</a>
+  <p class="muted">Needs macOS 15 or later, and the Ovrdue app on your iPhone signed into the same iCloud account. Signed and notarised by Apple, so it opens without warnings.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Setting up</h2>
+    <ol>
+      <li>Open the download and drag <strong>Ovrdue Helper</strong> into Applications, then open it from there.</li>
+      <li>A setup window walks you through two permissions: <strong>Full Disk Access</strong> (so it can read when you last messaged or called someone) and <strong>Contacts</strong> (so numbers turn into names). It never reads what was said.</li>
+      <li>Run the first scan. A card appears on your iPhone with the people it thinks are your friends. Put each one in a circle, or tap Work to leave them out.</li>
+    </ol>
+    <p class="muted" style="margin-bottom:0">After that it sits in the menu bar, rescans every few hours, and keeps your iPhone's "last spoke" dates up to date through your own iCloud. <a href="privacy.html#sync">How syncing stays private.</a></p>
+  </div>
+
+  <h2>Something not right?</h2>
+  <p>Email <a href="mailto:hello@ovrdue.app">hello@ovrdue.app</a> with what you saw. The menu bar panel shows what each source found, which is usually the first thing I'll ask about.</p>
+</div>
+</body>
+</html>
