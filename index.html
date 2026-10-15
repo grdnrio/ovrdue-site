@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ovrdue – Stay close to the people who matter</title>
+<meta name="description" content="Ovrdue notices when it's been too long since you spoke to a friend, and makes reaching out one tap. For iPhone and Mac. Your data stays on your devices.">
+<meta property="og:title" content="Ovrdue">
+<meta property="og:description" content="Stay close to the people who matter. A quiet nudge when a friendship is going quiet.">
+<meta property="og:url" content="https://ovrdue.app">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ovrdue.app/home.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f6f1e9;
+    --peach: #fbe0cc;
+    --ink: #1c1b19;
+    --muted: #7a7570;
+    --card: rgba(255,255,255,0.78);
+    --clay: #c2664a;
+    --brick: #9e3d2e;
+    --sage: #5c8c66;
+    --radius: 24px;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html { min-height: 100%; background: var(--cream); }
+  body {
+    margin: 0; color: var(--ink); font-family: var(--sans); line-height: 1.5;
+    background: linear-gradient(180deg, var(--peach) 0, var(--cream) 900px);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; margin: 0; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.05; }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; }
+  h3 { font-size: 1.35rem; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; }
+  .brand svg { width: 30px; height: 30px; }
+  .nav-links { display: flex; gap: 22px; align-items: center; font-size: 0.95rem; }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* Buttons */
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--ink); color: var(--cream); border: 0; border-radius: 999px;
+    padding: 15px 26px; font: 600 1rem var(--sans); cursor: pointer; text-decoration: none;
+    transition: transform .12s ease, opacity .12s ease;
+  }
+  .pill:hover { opacity: .88; }
+  .pill:active { transform: scale(.98); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; background: var(--card); border-radius: 999px;
+    padding: 8px 14px; font-size: 0.9rem; font-weight: 500;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--radius); padding: 26px; box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+  }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding: 48px 0 72px; }
+  .hero .copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+  .hero .lede { font-size: 1.2rem; max-width: 34rem; }
+  .phone-wrap { display: flex; justify-content: center; }
+  .phone {
+    width: 300px; height: 560px; overflow: hidden; border-radius: 44px 44px 0 0; padding: 10px 10px 0; background: var(--ink);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(255,255,255,0.08) inset;
+    -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+  }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 36px 36px 0 0; }
+
+  /* Waitlist form */
+  form.waitlist { display: flex; gap: 10px; max-width: 460px; width: 100%; }
+  form.waitlist input {
+    flex: 1; min-width: 0; border: 1px solid rgba(28,27,25,0.12); background: rgba(255,255,255,0.8);
+    border-radius: 999px; padding: 14px 20px; font: 1rem var(--sans); color: var(--ink);
+  }
+  form.waitlist input:focus { outline: 2px solid var(--clay); outline-offset: 1px; border-color: transparent; }
+  form.waitlist .pill { padding-inline: 22px; white-space: nowrap; }
+  .form-note { font-size: 0.85rem; }
+  .form-note[data-state="ok"] { color: var(--sage); }
+  .form-note[data-state="err"] { color: var(--brick); }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .section-head { max-width: 40rem; margin-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .step { display: flex; flex-direction: column; gap: 10px; }
+  .step .n {
+    width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--serif); font-size: 1.15rem; background: var(--ink); color: var(--cream);
+  }
+
+  /* Rings illustration */
+  .rings { width: 100%; max-width: 360px; margin: 0 auto; display: block; }
+
+  /* Sources */
+  .sources { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* Privacy */
+  .privacy { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .privacy ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .privacy li { display: flex; gap: 12px; align-items: flex-start; }
+  .privacy li svg { flex: none; width: 22px; height: 22px; margin-top: 2px; color: var(--clay); }
+
+  /* FAQ */
+  details { border-top: 1px solid rgba(28,27,25,0.1); padding: 18px 0; }
+  details:last-of-type { border-bottom: 1px solid rgba(28,27,25,0.1); }
+  summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--serif); font-size: 1.4rem; color: var(--muted); }
+  details[open] summary::after { content: "–"; }
+  details p { margin-top: 10px; max-width: 46rem; }
+
+  /* CTA */
+  .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 48px 26px; }
+
+  footer { padding: 36px 0 48px; font-size: 0.85rem; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { text-decoration: none; color: var(--muted); }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 24px 0 48px; }
+    .phone { width: 260px; height: 480px; }
+    .grid-3, .grid-2, .privacy { grid-template-columns: 1fr; }
+    .nav-links a:not(.pill) { display: none; }
+    form.waitlist { flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#1c1b19" stroke-opacity=".18" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="9.5" fill="none" stroke="#1c1b19" stroke-opacity=".3" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="5" fill="none" stroke="#c2664a" stroke-width="2.2"/>
+        <circle cx="16" cy="16" r="1.6" fill="#c2664a"/>
+      </svg>
+      Ovrdue
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+      <a class="pill" href="#waitlist" style="padding:11px 18px;font-size:.9rem">Join the waitlist</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="copy">
+      <span class="chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+        Coming to iPhone and Mac
+      </span>
+      <h1>Stay close to<br>the people who matter.</h1>
+      <p class="lede muted">Ovrdue notices when it's been too long since you spoke to a friend, and makes reaching out one tap. No feeds, no streaks, no nagging. Just a quiet nudge when a friendship is going quiet.</p>
+      <form class="waitlist" id="waitlist-hero" data-waitlist>
+        <label for="email-hero" class="visually-hidden" style="position:absolute;left:-9999px">Email address</label>
+        <input id="email-hero" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="pill" type="submit">Join the waitlist</button>
+      </form>
+      <p class="form-note muted" data-note>We'll email you once when it's ready, and never pass your address on.</p>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone"><img src="home.webp" width="590" height="1279" alt="Ovrdue home screen: three rings with a dot for each friend, four overdue, and a button to reach out to Chloe"></div>
+    </div>
+  </header>
+
+  <section id="how">
+    <div class="section-head">
+      <h2>Three circles. One tap.</h2>
+      <p class="muted">Most apps for keeping in touch turn your friends into a to-do list. Ovrdue does less, on purpose.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card step">
+        <span class="n">1</span>
+        <h3>Pick your people</h3>
+        <p class="muted">Choose the friends you actually want to stay close to and put them in a circle: inner, good, or catch-up. Each circle has its own rhythm, from every couple of weeks to a few times a year.</p>
+      </div>
+      <div class="card step">
+        <span class="n">2</span>
+        <h3>Ovrdue keeps count</h3>
+        <p class="muted">The Mac helper notices when you last spoke to each friend on WhatsApp, iMessage, phone and FaceTime, and when you last met up in your calendar. It only ever looks at dates, never what you said.</p>
+      </div>
+      <div class="card step">
+        <span class="n">3</span>
+        <h3>Reach out in a tap</h3>
+        <p class="muted">When someone's gone quiet, their dot turns red. One tap opens the chat. Send the message, and Ovrdue marks it done. A weekly nudge, nothing more.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid-2" style="align-items:center">
+      <div>
+        <svg class="rings" viewBox="0 0 320 320" role="img" aria-label="Three rings showing friends as dots; green are in touch, red are overdue">
+          <circle cx="160" cy="160" r="150" fill="none" stroke="#1c1b19" stroke-opacity=".12" stroke-width="1.5"/>
+          <circle cx="160" cy="160" r="110" fill="none" stroke="#1c1b19" stroke-opacity=".12" stroke-width="1.5"/>
+          <circle cx="160" cy="160" r="70" fill="none" stroke="#1c1b19" stroke-opacity=".22" stroke-width="1.5"/>
+          <g stroke="#f6f1e9" stroke-width="3">
+            <circle cx="160" cy="90" r="7" fill="#5c8c66"/>
+            <circle cx="220.6" cy="195" r="7" fill="#5c8c66"/>
+            <circle cx="99.4" cy="195" r="7" fill="#9e3d2e"/>
+            <circle cx="197.6" cy="56.6" r="7" fill="#5c8c66"/>
+            <circle cx="160" cy="270" r="7" fill="#5c8c66"/>
+            <circle cx="56.6" cy="122.4" r="7" fill="#9e3d2e"/>
+            <circle cx="256.4" cy="103.6" r="7" fill="#c2664a"/>
+            <circle cx="63.6" cy="216.4" r="7" fill="#9e3d2e"/>
+          </g>
+          <text x="160" y="166" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="44" fill="#1c1b19">3</text>
+          <text x="160" y="188" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif" font-size="12" font-weight="500" fill="#7a7570">ovrdue</text>
+        </svg>
+      </div>
+      <div class="section-head" style="margin:0">
+        <h2>Your friendships, at a glance</h2>
+        <p class="muted">Every friend is a dot on the ring for their circle. Green means you're in touch. Red means it's been too long. Open the app and you know who to message before you've finished your coffee.</p>
+        <p class="muted">It syncs between your iPhone and Mac through iCloud, so the helper does the noticing and the phone does the reaching out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Works with how you actually talk</h2>
+      <p class="muted">Ovrdue picks up the last time you spoke from the places conversations really happen.</p>
+    </div>
+    <div class="sources">
+      <span class="chip">WhatsApp</span>
+      <span class="chip">iMessage and SMS</span>
+      <span class="chip">Phone and FaceTime</span>
+      <span class="chip">Calendar meet-ups</span>
+      <span class="chip">Instagram</span>
+      <span class="chip">Messenger</span>
+      <span class="chip">One-tap logging for everything else</span>
+    </div>
+    <p class="muted" style="margin-top:16px;max-width:46rem;font-size:.95rem">WhatsApp, iMessage and calls are read by the Mac helper. Instagram and Messenger come from the data export Meta lets you download. Anything else, log it with a tap.</p>
+  </section>
+
+  <section id="privacy">
+    <div class="card privacy" style="padding:36px">
+      <div class="section-head" style="margin:0">
+        <h2>Your data stays on your devices</h2>
+        <p class="muted">A friendship app that uploads your messages to a server would be a strange thing to trust. So Ovrdue doesn't have one.</p>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Only dates are read. Message text is never opened, stored or sent anywhere.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>No account to create. Sync between your iPhone and Mac runs through your own iCloud.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Nothing leaves your devices. We can't see your friends, and we don't want to.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ovrdue suggests, it never assumes. You confirm who counts as a friend.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-head">
+      <h2>Questions</h2>
+    </div>
+    <details>
+      <summary>Isn't this just a personal CRM?</summary>
+      <p class="muted">Those exist, and most of them feel like doing admin on your friends. Ovrdue has no pipeline, no notes you're meant to keep up, no scoring. It answers one question: who have I not spoken to in too long?</p>
+    </details>
+    <details>
+      <summary>Does it read my messages?</summary>
+      <p class="muted">No. The Mac helper reads when a message was sent or received, and who with. It never reads what was said, and nothing is uploaded anywhere.</p>
+    </details>
+    <details>
+      <summary>Why does it need a Mac?</summary>
+      <p class="muted">iPhone apps aren't allowed to see your WhatsApp or iMessage history. A Mac that's signed into the same accounts can. The helper sits in your menu bar, does the noticing, and syncs the dates to your phone through iCloud. The iPhone app still works on its own if you log catch-ups by hand.</p>
+    </details>
+    <details>
+      <summary>Will there be an Android or Windows version?</summary>
+      <p class="muted">Not at launch. Ovrdue is built on iCloud sync and on what a Mac is allowed to read, so it's an Apple thing for now.</p>
+    </details>
+    <details>
+      <summary>How much will it cost?</summary>
+      <p class="muted">We're still working that out. People on the waitlist will hear first, and will get the best price we ever offer.</p>
+    </details>
+  </section>
+
+  <section id="waitlist">
+    <div class="card cta">
+      <h2>Be first to try it</h2>
+      <p class="muted" style="max-width:34rem">Ovrdue is in development now. Leave your email and we'll let you know when the beta opens.</p>
+      <form class="waitlist" id="waitlist-bottom" data-waitlist>
+        <label for="email-bottom" style="position:absolute;left:-9999px">Email address</label>
+        <input id="email-bottom" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="pill" type="submit">Join the waitlist</button>
+      </form>
+      <p class="form-note muted" data-note>One email when it's ready. That's it.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="muted">© 2026 Ovrdue. Made in Southampton.</span>
+    <span><a href="mailto:hello@ovrdue.app">hello@ovrdue.app</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+  // Waitlist. Set WAITLIST_ENDPOINT to the form provider's POST URL
+  // (Kit, Buttondown, Formspree and similar all accept a plain email field).
+  const WAITLIST_ENDPOINT = "";
+
+  document.querySelectorAll("form[data-waitlist]").forEach(form => {
+    const note = form.parentElement.querySelector("[data-note]");
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      if (!WAITLIST_ENDPOINT) {
+        note.dataset.state = "err";
+        note.textContent = "The waitlist isn't wired up yet. Email hello@ovrdue.app and we'll add you by hand.";
+        return;
+      }
+      const btn = form.querySelector("button");
+      btn.disabled = true; btn.textContent = "Adding you…";
+      try {
+        const res = await fetch(WAITLIST_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        note.dataset.state = "ok";
+        note.textContent = "You're on the list. Thanks.";
+        form.reset();
+      } catch (err) {
+        note.dataset.state = "err";
+        note.textContent = "That didn't go through. Try again, or email hello@ovrdue.app.";
+      } finally {
+        btn.disabled = false; btn.textContent = "Join the waitlist";
+      }
+    });
+  });
+</script>
+</body>
+</html>
