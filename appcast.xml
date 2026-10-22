@@ -4,12 +4,12 @@
         <title>Ovrdue Helper</title>
         <item>
             <title>0.1.0</title>
-            <pubDate>Thu, 22 Oct 2026 16:24:47 +0100</pubDate>
+            <pubDate>Thu, 22 Oct 2026 16:42:03 +0100</pubDate>
             <link>https://ovrdue.app/mac.html</link>
-            <sparkle:version>54</sparkle:version>
+            <sparkle:version>55</sparkle:version>
             <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://ovrdue.app/downloads/Ovrdue-Helper-0.1.0-54.dmg" length="1853661" type="application/octet-stream" sparkle:edSignature="RSXhST+pBbpXSyMvbqYzlEqpnRa5GqYzWCk/wxdLGR4PTMFG1Zx7gUOvfzmPCJQSGLrJKHtbQZNHX7KkvxNnAw=="/>
+            <enclosure url="https://ovrdue.app/downloads/Ovrdue-Helper-0.1.0-55.dmg" length="1861852" type="application/octet-stream" sparkle:edSignature="DhsYz3h0XCc+Rwgh91NNbQr5bl6HM+p6+97ZaVc+iC6pQS+QYghtzeEgbk00BVm31Rfd4OTTfO5FP+RC10vGAQ=="/>
         </item>
     </channel>
 </rss>
