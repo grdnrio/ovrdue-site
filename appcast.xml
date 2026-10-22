@@ -4,24 +4,12 @@
         <title>Ovrdue Helper</title>
         <item>
             <title>0.1.0</title>
-            <pubDate>Thu, 22 Oct 2026 15:39:57 +0100</pubDate>
+            <pubDate>Thu, 22 Oct 2026 15:53:56 +0100</pubDate>
             <link>https://ovrdue.app/mac.html</link>
             <sparkle:version>52</sparkle:version>
             <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
             <enclosure url="https://ovrdue.app/downloads/Ovrdue-Helper-0.1.0-52.dmg" length="1822868" type="application/octet-stream" sparkle:edSignature="L900szoDpix9Ltcl68FhrwUZWViqTDBZmA9aj7qoWMzCgeqBybJgifs0sVKUz//Kb+Ocdpu9bHbt7qqqVxdkBg=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ovrdue.app/downloads/Ovrdue%20Helper52-51.delta" sparkle:deltaFrom="51" length="12362" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976464" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="W8wZAVlrtSn57dJRb0Z9HaZNBOXcE5CzGk0aucra6X3vztPIHMg21LcKLnXMjOug+iMzGfuFHQLTnwaUNYKpAQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>0.1.0</title>
-            <pubDate>Thu, 22 Oct 2026 15:37:25 +0100</pubDate>
-            <link>https://ovrdue.app/mac.html</link>
-            <sparkle:version>51</sparkle:version>
-            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://ovrdue.app/downloads/Ovrdue-Helper-0.1.0.dmg" length="1822877" type="application/octet-stream" sparkle:edSignature="Xe6fxUdPWHGpZVaZQTER0yIYdQu5kpbrG9mDrVHuwuSJHLliMLMVXfXayjnSkpezk83pUBQUssyXoelxIK68Bw=="/>
         </item>
     </channel>
 </rss>
