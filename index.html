@@ -93,6 +93,9 @@
   .phone img { display: block; width: 100%; height: auto; border-radius: 36px 36px 0 0; }
 
   /* Waitlist form */
+  .get-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill.ghost { background: transparent; color: var(--ink); border: 1.5px solid rgba(28,27,25,0.25); }
+  .pill.ghost:hover { background: rgba(255,255,255,0.6); }
   form.waitlist { display: flex; gap: 10px; max-width: 460px; width: 100%; }
   form.waitlist input {
     flex: 1; min-width: 0; border: 1px solid rgba(28,27,25,0.12); background: rgba(255,255,255,0.8);
@@ -169,7 +172,7 @@
       <a href="#how">How it works</a>
       <a href="#privacy">Privacy</a>
       <a href="#faq">FAQ</a>
-      <a class="pill" href="#waitlist" style="padding:11px 18px;font-size:.9rem">Join the waitlist</a>
+      <a class="pill" href="#get" style="padding:11px 18px;font-size:.9rem">Get the app</a>
     </div>
   </nav>
 
@@ -177,16 +180,15 @@
     <div class="copy">
       <span class="chip">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
-        Coming to iPhone and Mac
+        Now on the App Store
       </span>
       <h1>Stay close to<br>the people who matter.</h1>
       <p class="lede muted">Ovrdue notices when it's been too long since you spoke to a friend, and makes reaching out one tap. No feeds, no streaks, no nagging. Just a quiet nudge when a friendship is going quiet.</p>
-      <form class="waitlist" id="waitlist-hero" data-waitlist>
-        <label for="email-hero" class="visually-hidden" style="position:absolute;left:-9999px">Email address</label>
-        <input id="email-hero" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        <button class="pill" type="submit">Join the waitlist</button>
-      </form>
-      <p class="form-note muted" data-note>We'll email you once when it's ready, and never pass your address on.</p>
+      <div class="get-buttons">
+        <a class="pill" href="https://apps.apple.com/gb/app/ovrdue/id6823236228">Download on the App Store</a>
+        <a class="pill ghost" href="mac.html">Get the free Mac helper</a>
+      </div>
+      <p class="form-note muted">Free for up to five friends. Pro from £2.99 a month, or £49.99 once for life while the Founder price lasts.</p>
     </div>
     <div class="phone-wrap">
       <div class="phone"><img src="home.webp" width="590" height="1279" alt="Ovrdue home screen: three rings with a dot for each friend, four overdue, and a button to reach out to Chloe"></div>
@@ -304,20 +306,19 @@
     </details>
     <details>
       <summary>How much will it cost?</summary>
-      <p class="muted">The app is free for up to five people in your circles, with the reconnect list on top. Ovrdue Pro is £24.99 a year with a 7-day free trial, or £2.99 a month, and adds as many people as you like, the Mac helper keeping your dates up to date, calendar meet-ups, the Instagram and Messenger import and a weekly round-up. At launch there's also a one-off Founder price of £49.99 for Pro for life, and people on the waitlist will hear about it first.</p>
+      <p class="muted">The app is free for up to five people in your circles, with the reconnect list on top. Ovrdue Pro is £24.99 a year with a 7-day free trial, or £2.99 a month, and adds as many people as you like, the Mac helper keeping your dates up to date, calendar meet-ups, the Instagram and Messenger import and a weekly round-up. For a limited time there's also a one-off Founder price of £49.99 for Pro for life.</p>
     </details>
   </section>
 
-  <section id="waitlist">
+  <section id="get">
     <div class="card cta">
-      <h2>Be first to try it</h2>
-      <p class="muted" style="max-width:34rem">Ovrdue is in development now. Leave your email and we'll let you know when the beta opens.</p>
-      <form class="waitlist" id="waitlist-bottom" data-waitlist>
-        <label for="email-bottom" style="position:absolute;left:-9999px">Email address</label>
-        <input id="email-bottom" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        <button class="pill" type="submit">Join the waitlist</button>
-      </form>
-      <p class="form-note muted" data-note>One email when it's ready. That's it.</p>
+      <h2>Ready when you are</h2>
+      <p class="muted" style="max-width:34rem">Ovrdue is on the App Store for iPhone. The Mac helper is a free download and does the noticing for you.</p>
+      <div class="get-buttons" style="justify-content:center">
+        <a class="pill" href="https://apps.apple.com/gb/app/ovrdue/id6823236228">Download on the App Store</a>
+        <a class="pill ghost" href="mac.html">Get the free Mac helper</a>
+      </div>
+      <p class="form-note muted">Needs iOS 17 or later. The helper needs macOS 15 or later and the same iCloud account.</p>
     </div>
   </section>
 
@@ -327,43 +328,5 @@
   </footer>
 </div>
 
-<script>
-  // Waitlist: posts to a Kit form. The API key is Kit's public key, which is
-  // meant to live in a web page (the API secret is a different thing and never goes here).
-  const KIT_FORM_ID = "10050027";
-  const KIT_API_KEY = "_-ew7o79BSWsGlqOKO8Iyw";
-  const WAITLIST_ENDPOINT = `https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`;
-
-  document.querySelectorAll("form[data-waitlist]").forEach(form => {
-    const note = form.parentElement.querySelector("[data-note]");
-    form.addEventListener("submit", async e => {
-      e.preventDefault();
-      const email = form.email.value.trim();
-      if (!WAITLIST_ENDPOINT) {
-        note.dataset.state = "err";
-        note.textContent = "The waitlist isn't wired up yet. Email hello@ovrdue.app and we'll add you by hand.";
-        return;
-      }
-      const btn = form.querySelector("button");
-      btn.disabled = true; btn.textContent = "Adding you…";
-      try {
-        const res = await fetch(WAITLIST_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({ api_key: KIT_API_KEY, email })
-        });
-        if (!res.ok) throw new Error(String(res.status));
-        note.dataset.state = "ok";
-        note.textContent = "You're on the list. Thanks.";
-        form.reset();
-      } catch (err) {
-        note.dataset.state = "err";
-        note.textContent = "That didn't go through. Try again, or email hello@ovrdue.app.";
-      } finally {
-        btn.disabled = false; btn.textContent = "Join the waitlist";
-      }
-    });
-  });
-</script>
 </body>
 </html>
